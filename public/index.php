@@ -75,11 +75,10 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                         ->withHeader('Content-Type', 'application/json')
                         ->withStatus($result->getHTTPStatus());
                 }
-
-                if($event['message'] == 'stiker'){
-                    $stickerMessageBuilder = new StickerMessageBuilder(1, 3);
-                    $bot->replyMessage($event['replayToken'], $stickerMessageBuilder);
-                }
+            }
+            if($event['type'] == 'sticker'){
+                $stickerMessageBuilder = new StickerMessageBuilder(1, 3);
+                $bot->replyMessage($event['replayToken'], $stickerMessageBuilder);
             }
         }
         return $response->withStatus(200, 'for Webhook!'); //buat ngasih response 200 ke pas verify webhook
