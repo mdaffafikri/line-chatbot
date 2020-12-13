@@ -70,7 +70,7 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                     ->withStatus($result->getHTTPStatus());
                 }
                 
-                if($event['message']['text'] == 'Halo'){
+                if($event['message']['text'] == 'halo'){
                     $result = $bot->replyText($event['replyToken'], 'Hai');
                     
                     $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
