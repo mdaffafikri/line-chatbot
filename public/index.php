@@ -120,4 +120,17 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
     return $response->withStatus(400, 'No event sent!');
  
 });
+
+$app->get('/pushmessage', function ($req, $response) use ($bot) {
+    // send push message to user
+    $userId = '@dafxz';
+    $textMessageBuilder = new TextMessageBuilder('Your bot sent you a push message');
+    $result = $bot->pushMessage($userId, $textMessageBuilder);
+ 
+    $response->getBody()->write("Pesan push berhasil dikirim!");
+    return $response
+        ->withHeader('Content-Type', 'application/json')
+        ->withStatus($result->getHTTPStatus());
+});
+
 $app->run();
