@@ -58,7 +58,7 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
         foreach ($data['events'] as $event)
         {
             if ($event['type'] == 'message')
-            strtolower($event['message']['text']);
+            $event['message']['text'] = strtolower($event['message']['text']);
             {                                    
                 if($event['message']['type'] == 'sticker'){
                     $stickerMessageBuilder = new StickerMessageBuilder(1, 3);
