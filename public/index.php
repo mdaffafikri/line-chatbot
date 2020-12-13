@@ -58,8 +58,17 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
         foreach ($data['events'] as $event)
         {
             if ($event['type'] == 'message')
-            $event['message']['text'] = strtolower($event['message']['text']);
+            $specialMsg = strtolower($event['message']['text']);
             {                                    
+                if($specialMsg == 'halo'){
+                    $result = $bot->replyText($event['replyToken'], 'Hai');
+                    
+                    $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
+                    return $response
+                        ->withHeader('Content-Type', 'application/json')
+                        ->withStatus($result->getHTTPStatus());
+                }
+                
                 if($event['message']['type'] == 'sticker'){
                     $stickerMessageBuilder = new StickerMessageBuilder(1, 3);
                     $result = $bot->replyMessage($event['replyToken'], $stickerMessageBuilder);
@@ -70,14 +79,6 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                     ->withStatus($result->getHTTPStatus());
                 }
                 
-                if($event['message']['text'] == 'halo'){
-                    $result = $bot->replyText($event['replyToken'], 'Hai');
-                    
-                    $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
-                    return $response
-                        ->withHeader('Content-Type', 'application/json')
-                        ->withStatus($result->getHTTPStatus());
-                }
 
                 if($event['message']['type'] == 'text')
                 {
