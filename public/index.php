@@ -133,4 +133,16 @@ $app->get('/pushmessage', function ($req, $response) use ($bot) {
         ->withStatus($result->getHTTPStatus());
 });
 
+$app->get('/profile', function ($req, $response) use ($bot)
+{
+    // get user profile
+    $userId = 'U549e297d91e9f6834ece8711914b0564';
+    $result = $bot->getProfile($userId);
+ 
+    $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
+    return $response
+        ->withHeader('Content-Type', 'application/json')
+        ->withStatus($result->getHTTPStatus());
+});
+
 $app->run();
