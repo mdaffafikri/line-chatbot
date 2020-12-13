@@ -59,21 +59,21 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
         {
             if ($event['type'] == 'message')
             {
-                if($event['message']['type'] == 'text')
-                {
-                    // send same message as reply to user
-                    $result = $bot->replyText($event['replyToken'], $event['message']['text']);                    
+                // if($event['message']['type'] == 'text')
+                // {
+                //     // send same message as reply to user
+                //     $result = $bot->replyText($event['replyToken'], $event['message']['text']);                    
     
-                    // or we can use replyMessage() instead to send reply message
-                    // $textMessageBuilder = new TextMessageBuilder($event['message']['text']);
-                    // $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
+                //     // or we can use replyMessage() instead to send reply message
+                //     // $textMessageBuilder = new TextMessageBuilder($event['message']['text']);
+                //     // $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
     
     
-                    $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
-                    return $response
-                        ->withHeader('Content-Type', 'application/json')
-                        ->withStatus($result->getHTTPStatus());
-                    }
+                //     $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
+                //     return $response
+                //         ->withHeader('Content-Type', 'application/json')
+                //         ->withStatus($result->getHTTPStatus());
+                //     }
                     
                     if($event['message']['type'] == 'sticker'){
                         $stickerMessageBuilder = new StickerMessageBuilder(1, 3);
