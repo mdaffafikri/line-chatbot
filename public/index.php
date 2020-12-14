@@ -149,7 +149,7 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                 
                 if($specialMsg == 'total test covid'){
                    
-                    $result = $bot->replyText($replyToken, 'Total test sampai hari ini adalah '.$json->test);
+                    $result = $bot->replyText($replyToken, 'Total test sampai hari ini adalah '.$json->tests);
                     
                     $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
                     return $response
