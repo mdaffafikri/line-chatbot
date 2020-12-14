@@ -58,7 +58,7 @@
                 },
                 {
                   "type": "text",
-                  "text": "Menampilkan info Covid-19",
+                  "text": "Menampilkan informasi tentang Covid-19",
                   "wrap": true,
                   "color": "#666666",
                   "size": "sm",
