@@ -104,17 +104,9 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
 
             //greeting join group
             if($event['type'] == 'join'){
-                $greeting1 = new TextMessageBuilder('Hi semua, terima kasih telah mengundangku kesini!');
-                $greeting2 = new TextMessageBuilder(
-                    'Berikut ini adalah command yang bisa aku pahami: \n\n
-                    \"Halo" : Say hi! \n
-                    \"Help: Menampilkan command list');
-                
-                $multiMessage = new MultiMessageBuilder();
-                $multiMessage->add($greeting1);
-                $multiMessage->add($greeting2);
+                $replyToken = $event['replyToken'];                
 
-                $result =  $bot->replyMessage($replyToken, $multiMessage);
+                $result = $bot->replyText($replyToken, 'Hai semua, terima kasih telah mengundangku kesini! Chat aku untuk mengetahui command listnya ya...');
                 $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
                     return $response
                         ->withHeader('Content-Type', 'application/json')
