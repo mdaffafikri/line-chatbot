@@ -86,7 +86,7 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                     ->withStatus($result->getHTTPStatus());
                 }
 
-                if($specialMsg == 'hari apa sekarang?'){
+                if($specialMsg == 'info hari'){
                     $result = $bot->replyText($replyToken, 'Hari ini adalah '.date("l"));
                     
                     $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
@@ -95,7 +95,7 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                         ->withStatus($result->getHTTPStatus());
                 }
 
-                if($specialMsg == 'tanggal berapa sekarang?'){
+                if($specialMsg == 'info tanggal'){
                     $result = $bot->replyText($replyToken, 'Sekarang adalah tanggal '.date("d/m/Y"));
                     
                     $response->getBody()->write(json_encode($result->getJSONDecodedBody()));

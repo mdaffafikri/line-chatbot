@@ -73,14 +73,14 @@
                 "contents": [
                   {
                     "type": "text",
-                    "text": "Hari apa sekarang?",
+                    "text": "Info hari",
                     "color": "#aaaaaa",
                     "size": "sm",
                     "flex": 4
                   },
                   {
                     "type": "text",
-                    "text": "Informasi hari",
+                    "text": "Menampilkan hari ini",
                     "wrap": true,
                     "color": "#666666",
                     "size": "sm",
@@ -95,14 +95,14 @@
                 "contents": [
                   {
                     "type": "text",
-                    "text": "Tanggal berapa sekarang?",
+                    "text": "Info tanggal",
                     "color": "#aaaaaa",
                     "size": "sm",
                     "flex": 4
                   },
                   {
                     "type": "text",
-                    "text": "Informasi tanggal",
+                    "text": "Menampilkan tanggal berapa sekarang",
                     "wrap": true,
                     "color": "#666666",
                     "size": "sm",
@@ -117,7 +117,7 @@
               "contents": [
                 {
                   "type": "text",
-                  "text": "Covid info",
+                  "text": "Info covid",
                   "color": "#aaaaaa",
                   "size": "sm",
                   "flex": 4
