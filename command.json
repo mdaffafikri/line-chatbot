@@ -1,0 +1,95 @@
+{
+    "type": "bubble",
+    "body": {
+      "type": "box",
+      "layout": "vertical",
+      "contents": [
+        {
+          "type": "text",
+          "text": "Command List",
+          "weight": "bold",
+          "size": "xl"
+        },
+        {
+          "type": "box",
+          "layout": "baseline",
+          "margin": "md",
+          "contents": []
+        },
+        {
+          "type": "box",
+          "layout": "vertical",
+          "margin": "lg",
+          "spacing": "sm",
+          "contents": [
+            {
+              "type": "box",
+              "layout": "baseline",
+              "spacing": "sm",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "Halo ",
+                  "color": "#aaaaaa",
+                  "size": "sm",
+                  "flex": 2
+                },
+                {
+                  "type": "text",
+                  "text": "Say hi!",
+                  "wrap": true,
+                  "color": "#666666",
+                  "size": "sm",
+                  "flex": 5
+                }
+              ]
+            },
+            {
+              "type": "box",
+              "layout": "baseline",
+              "spacing": "sm",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "Covid info",
+                  "color": "#aaaaaa",
+                  "size": "sm",
+                  "flex": 2
+                },
+                {
+                  "type": "text",
+                  "text": "Menampilkan info Covid-19",
+                  "wrap": true,
+                  "color": "#666666",
+                  "size": "sm",
+                  "flex": 5
+                }
+              ]
+            },
+            {
+              "type": "box",
+              "layout": "baseline",
+              "spacing": "sm",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "Command",
+                  "color": "#aaaaaa",
+                  "size": "sm",
+                  "flex": 2
+                },
+                {
+                  "type": "text",
+                  "text": "Menampilkan command list",
+                  "wrap": true,
+                  "color": "#666666",
+                  "size": "sm",
+                  "flex": 5
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }

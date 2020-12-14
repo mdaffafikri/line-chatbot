@@ -103,17 +103,21 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
 
                 
                 if($event['source']['type'] == 'user'){
-                    if($specialMsg == 'command list'){                        
-                        $text = 'Berikut ini adalah command list yang bisa kamu gunakan. "Halo": Say hi!, "Covid-19 info": Menampilkan informasi covid 19" Command list": Menampilkan command list';
-                        $result = $bot->replyText($replyToken, $text);
-                        
-                        $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
-                        return $response
-                            ->withHeader('Content-Type', 'application/json')
-                            ->withStatus($result->getHTTPStatus());
+                    if($specialMsg == 'command'){                        
+                        $flexTemplate = file_get_contents("../command.json"); // template flex message
+                        $result = $httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
+                            'replyToken' => $replyToken,
+                            'messages'   => [
+                                [
+                                    'type'     => 'flex',
+                                    'altText'  => 'Command list',
+                                    'contents' => json_decode($flexTemplate)
+                                ]
+                            ],
+                        ]);
                     }
                     else{
-                        $result = $bot->replyText($replyToken, 'Aku tidak mengerti, silahkan ketik "command list" untuk melihat apa saja yang bisa kulakukan');
+                        $result = $bot->replyText($replyToken, 'Aku tidak mengerti, silahkan ketik "command" untuk melihat apa saja yang bisa kulakukan');
                         
                         $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
                         return $response
