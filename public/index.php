@@ -146,18 +146,8 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                         ->withHeader('Content-Type', 'application/json')
                         ->withStatus($result->getHTTPStatus());
                 }
-
-                if($specialMsg == 'total test covid'){
-                   
-                    $result = $bot->replyText($replyToken, 'Total kasus sampai hari ini adalah '.$json->cases);
-                    
-                    $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
-                    return $response
-                        ->withHeader('Content-Type', 'application/json')
-                        ->withStatus($result->getHTTPStatus());
-                }
                 
-                if($specialMsg == 'total sembuh covid'){
+                if($specialMsg == 'total test covid'){
                    
                     $result = $bot->replyText($replyToken, 'Total test sampai hari ini adalah '.$json->test);
                     
