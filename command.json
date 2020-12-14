@@ -32,7 +32,7 @@
                   "text": "Halo ",
                   "color": "#aaaaaa",
                   "size": "sm",
-                  "flex": 2
+                  "flex": 4
                 },
                 {
                   "type": "text",
@@ -54,7 +54,7 @@
                     "text": "Apa kabar?",
                     "color": "#aaaaaa",
                     "size": "sm",
-                    "flex": 2
+                    "flex": 4
                   },
                   {
                     "type": "text",
@@ -76,7 +76,7 @@
                     "text": "Hari apa ini?",
                     "color": "#aaaaaa",
                     "size": "sm",
-                    "flex": 2
+                    "flex": 4
                   },
                   {
                     "type": "text",
@@ -98,7 +98,7 @@
                   "text": "Covid info",
                   "color": "#aaaaaa",
                   "size": "sm",
-                  "flex": 2
+                  "flex": 4
                 },
                 {
                   "type": "text",
@@ -120,7 +120,7 @@
                   "text": "Command",
                   "color": "#aaaaaa",
                   "size": "sm",
-                  "flex": 2
+                  "flex": 4
                 },
                 {
                   "type": "text",
