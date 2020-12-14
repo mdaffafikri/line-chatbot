@@ -73,7 +73,7 @@
                 "contents": [
                   {
                     "type": "text",
-                    "text": "Hari apa ini?",
+                    "text": "Hari apa sekarang?",
                     "color": "#aaaaaa",
                     "size": "sm",
                     "flex": 4
@@ -81,6 +81,28 @@
                   {
                     "type": "text",
                     "text": "Informasi hari",
+                    "wrap": true,
+                    "color": "#666666",
+                    "size": "sm",
+                    "flex": 5
+                  }
+                ]
+            },
+            {
+                "type": "box",
+                "layout": "baseline",
+                "spacing": "sm",
+                "contents": [
+                  {
+                    "type": "text",
+                    "text": "Tanggal berapa sekarang?",
+                    "color": "#aaaaaa",
+                    "size": "sm",
+                    "flex": 4
+                  },
+                  {
+                    "type": "text",
+                    "text": "Informasi tanggal",
                     "wrap": true,
                     "color": "#666666",
                     "size": "sm",
