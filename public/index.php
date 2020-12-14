@@ -61,6 +61,28 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                 $replyToken = $event['replyToken'];
                 $specialMsg = strtolower($event['message']['text']);                                
 
+                if($event['source']['type'] == 'user'){
+                    if($specialMsg == 'command list'){                        
+                        $text = 'Berikut ini adalah command list yang bisa kamu gunakan: \n\n
+                        \Halo: Say hi!\n
+                        \Command list: Menampilkan command list';
+                        $result = $bot->replyText($replyToken, $text);
+                        
+                        $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
+                        return $response
+                            ->withHeader('Content-Type', 'application/json')
+                            ->withStatus($result->getHTTPStatus());
+                    }
+                    else{
+                        $result = $bot->replyText($replyToken, 'Aku tidak mengerti, silahkan ketik "command list" untuk melihat apa saja yang bisa kulakukan');
+                        
+                        $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
+                        return $response
+                            ->withHeader('Content-Type', 'application/json')
+                            ->withStatus($result->getHTTPStatus());
+                    }
+                }
+
                 if($specialMsg == 'halo'){
                     $result = $bot->replyText($event['replyToken'], 'Hai');
                     
