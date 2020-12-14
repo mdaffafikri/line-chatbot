@@ -128,6 +128,21 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                     ->withHeader('Content-Type', 'application/json')
                     ->withStatus($result->getHTTPStatus());
                 }
+
+                if($specialMsg == 'flex message') {
+                    $flexTemplate = file_get_contents("../flex_message.json"); // template flex message
+                    $result = $httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
+                        'replyToken' => $event['replyToken'],
+                        'messages'   => [
+                            [
+                                'type'     => 'flex',
+                                'altText'  => 'Test Flex Message',
+                                'contents' => json_decode($flexTemplate)
+                            ]
+                        ],
+                    ]);
+
+                } 
               }
             }
         }
