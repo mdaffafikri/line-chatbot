@@ -105,8 +105,8 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                 if($event['source']['type'] == 'user'){
                     if($specialMsg == 'command list'){                        
                         $text = 'Berikut ini adalah command list yang bisa kamu gunakan:
-                        \\Halo: Say hi!
-                        \\Command list: Menampilkan command list';
+                        \Halo: Say hi!
+                        \Command list: Menampilkan command list';
                         $result = $bot->replyText($replyToken, $text);
                         
                         $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
