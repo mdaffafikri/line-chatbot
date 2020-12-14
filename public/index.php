@@ -123,7 +123,7 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                     curl_close($curl);
 
                     $json = json_decode($content);
-                    $result = $bot->replyText($replyToken, $json->result->cases);
+                    $result = $bot->replyText($replyToken, $json->cases);
                     
                     $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
                     return $response
