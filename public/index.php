@@ -57,37 +57,10 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
     if(is_array($data['events'])){
         foreach ($data['events'] as $event)
         {
-            if ($event['type'] == 'message')
-            {                                    
+            if ($event['type'] == 'message'){                                    
                 $replyToken = $event['replyToken'];
                 $specialMsg = strtolower($event['message']['text']);                                
 
-                //group room
-                if($event['source']['type'] == 'group' or $event['source']['type'] == 'room'){
-                //message from group / room              
-                    if($event['message']['type'] == 'sticker'){
-                        $stickerMessageBuilder = new StickerMessageBuilder(1, 3);
-                        $result = $bot->replyMessage($event['replyToken'], $stickerMessageBuilder);
-                        
-                        $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
-                        return $response
-                        ->withHeader('Content-Type', 'application/json')
-                        ->withStatus($result->getHTTPStatus());
-                    }
-            
-                    if($event['message']['type'] == 'text')
-                    {
-                        // send same message as reply to user
-                        $result = $bot->replyText($event['replyToken'], $event['message']['text']);                    
-
-                        $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
-                        return $response
-                            ->withHeader('Content-Type', 'application/json')
-                            ->withStatus($result->getHTTPStatus());
-                    }
-              }
-
-              else {
                 if($specialMsg == 'halo'){
                     $result = $bot->replyText($event['replyToken'], 'Hai');
                     
@@ -127,12 +100,21 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                     ]);
 
                 } 
-              }
             }
 
             //greeting join group
             if($event['type'] == 'join'){
-                $result = $bot->replyText($event['replyToken'], 'Hi semua, terima kasih telah menambahkanku kesini ^_^');
+                $greeting1 = new TextMessageBuilder('Hi semua, terima kasih telah mengundangku kesini!');
+                $greeting2 = new TextMessageBuilder(
+                    'Berikut ini adalah command yang bisa aku pahami: \n\n
+                    \"Halo" : Say hi! \n
+                    \"Help: Menampilkan command list');
+                
+                $multiMessage = new MultiMessageBuilder();
+                $multiMessage->add($greeting1);
+                $multiMessage->add($greeting2);
+
+                $result =  $bot->replyMessage($replyToken, $multiMessage);
                 $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
                     return $response
                         ->withHeader('Content-Type', 'application/json')
