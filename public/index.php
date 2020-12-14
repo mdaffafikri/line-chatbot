@@ -103,6 +103,32 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                         ->withHeader('Content-Type', 'application/json')
                         ->withStatus($result->getHTTPStatus());
                 }
+
+                if($specialMsg == 'info covid'){
+                    $curl = curl_init();
+
+                    curl_setopt_array($curl, array(
+                    CURLOPT_URL => "https://corona.lmao.ninja/v2/all?yesterday",
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_ENCODING => "",
+                    CURLOPT_MAXREDIRS => 10,
+                    CURLOPT_TIMEOUT => 0,
+                    CURLOPT_FOLLOWLOCATION => true,
+                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                    CURLOPT_CUSTOMREQUEST => "GET",
+                    ));
+
+                    $content = curl_exec($curl);
+
+                    curl_close($curl);
+
+                    $result = $bot->replyText($replyToken, $content);
+                    
+                    $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
+                    return $response
+                        ->withHeader('Content-Type', 'application/json')
+                        ->withStatus($result->getHTTPStatus());
+                }
                 
                 if($event['source']['type'] == 'user'){
                     if($specialMsg == 'command'){                        
