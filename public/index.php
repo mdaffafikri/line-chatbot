@@ -62,7 +62,7 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                 $specialMsg = strtolower($event['message']['text']);                                
 
                 if($specialMsg == 'halo'){
-                    $result = $bot->replyText($event['replyToken'], 'Hai');
+                    $result = $bot->replyText($replyToken, 'Hai');
                     
                     $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
                     return $response
@@ -86,21 +86,14 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                     ->withStatus($result->getHTTPStatus());
                 }
 
-                if($specialMsg == 'flex message') {
-                    $flexTemplate = file_get_contents("../flex_message.json"); // template flex message
-                    $result = $httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
-                        'replyToken' => $event['replyToken'],
-                        'messages'   => [
-                            [
-                                'type'     => 'flex',
-                                'altText'  => 'Test Flex Message',
-                                'contents' => json_decode($flexTemplate)
-                            ]
-                        ],
-                    ]);
-
-                } 
-
+                if($specialMsg == 'hari apa ini?'){
+                    $result = $bot->replyText($replyToken, 'Hari ini adalah '.date("l"));
+                    
+                    $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
+                    return $response
+                        ->withHeader('Content-Type', 'application/json')
+                        ->withStatus($result->getHTTPStatus());
+                }
                 
                 if($event['source']['type'] == 'user'){
                     if($specialMsg == 'command'){                        
