@@ -61,6 +61,25 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                 $replyToken = $event['replyToken'];
                 $specialMsg = strtolower($event['message']['text']);                                
 
+                //covid-19 api
+                $curl = curl_init();
+
+                curl_setopt_array($curl, array(
+                CURLOPT_URL => "https://corona.lmao.ninja/v2/all?yesterday",
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => "",
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => "GET",
+                ));
+
+                $content = curl_exec($curl);
+                curl_close($curl);
+
+                $json = json_decode($content);
+
                 if($specialMsg == 'halo'){
                     $result = $bot->replyText($replyToken, 'Hai');
                     
@@ -119,25 +138,18 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                 }
 
                 if($specialMsg == 'total kasus covid'){
-                    $curl = curl_init();
+                   
+                    $result = $bot->replyText($replyToken, 'Total kasus sampai hari ini adalah '.$json->cases);
+                    
+                    $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
+                    return $response
+                        ->withHeader('Content-Type', 'application/json')
+                        ->withStatus($result->getHTTPStatus());
+                }
 
-                    curl_setopt_array($curl, array(
-                    CURLOPT_URL => "https://corona.lmao.ninja/v2/all?yesterday",
-                    CURLOPT_RETURNTRANSFER => true,
-                    CURLOPT_ENCODING => "",
-                    CURLOPT_MAXREDIRS => 10,
-                    CURLOPT_TIMEOUT => 0,
-                    CURLOPT_FOLLOWLOCATION => true,
-                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                    CURLOPT_CUSTOMREQUEST => "GET",
-                    ));
-
-                    $content = curl_exec($curl);
-
-                    curl_close($curl);
-                    $json = json_decode($content);
-
-                    $result = $bot->replyText($replyToken, 'Total kasus hari ini adalah '.$json->cases);
+                if($specialMsg == 'total test covid'){
+                   
+                    $result = $bot->replyText($replyToken, 'Total test sampai hari ini adalah '.$json->cases);
                     
                     $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
                     return $response
@@ -145,6 +157,26 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                         ->withStatus($result->getHTTPStatus());
                 }
                 
+                if($specialMsg == 'total sembuh covid'){
+                   
+                    $result = $bot->replyText($replyToken, 'Total test sampai hari ini adalah '.$json->test);
+                    
+                    $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
+                    return $response
+                        ->withHeader('Content-Type', 'application/json')
+                        ->withStatus($result->getHTTPStatus());
+                }
+
+                if($specialMsg == 'total sembuh covid'){
+                   
+                    $result = $bot->replyText($replyToken, 'Total sembuh sampai hari ini adalah '.$json->recovered);
+                    
+                    $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
+                    return $response
+                        ->withHeader('Content-Type', 'application/json')
+                        ->withStatus($result->getHTTPStatus());
+                }
+
                 if($event['source']['type'] == 'user'){
                     if($specialMsg == 'command'){                        
                         $flexTemplate = file_get_contents("../command.json"); // template flex message
